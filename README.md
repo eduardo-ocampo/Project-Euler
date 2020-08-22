@@ -1,5 +1,4 @@
 # Project Euler
----
 
 Hello! This is a repo containing my solutions to various Project Euler problems. I am an engineer and do not have a strong programming or mathematical background. However, puzzles have always interested me. I grew up trying to solve hanayama metal puzzles or thinking endlessly about riddles. What I like about Project Euler is the variety of puzzles they host. Some which require a clever use of data structures. My language of choice for solving problems is Python.  
 
