@@ -25,9 +25,9 @@ def find_matching_mult(mult,num_range):
     Parameters:
     -----------
     mult: int
-        Multiple to compare against
+        Multiple to compare agianst
 
-    num_rnage: list
+    num_range: list
         iterable containing a list of intergers to analysis
 
     Returns:
