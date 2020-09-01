@@ -50,9 +50,9 @@ def main(progress):
     axes.set_axis_off()
 
     sns.heatmap(hm_color,annot=txt_data,cmap="BuPu",fmt="d",linewidth=0.6,
-                ax=axes,cbar_kws={"orientation":"horizontal","shrink":0.70,
-                "label":"Difficulty Rating (%)"}   
-                             )
+                ax=axes,cbar_kws={"orientation":"horizontal","shrink":0.80,
+                "label":"Difficulty Rating (%)"},annot_kws={"size": 12})
+
     plt.tight_layout()
     plt.savefig('progress_heatmap.png')
 
