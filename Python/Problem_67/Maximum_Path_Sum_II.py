@@ -1,5 +1,5 @@
 """ --------------------------------------------------------------------------
-                       PROJECT EULER   -   PROBLEM 18                     
+                       PROJECT EULER   -   PROBLEM 67                     
                                                                            
                Copyright (c) Eduardo Ocampo, All Rights Reserved               
                https://www.github.com/thatguyeddieo                            
