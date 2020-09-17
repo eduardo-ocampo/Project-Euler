@@ -24,7 +24,7 @@ This problem ask to find how many, not necessarily distinct, values of  ![](http
 
 Now we can solve this problem using the combination formula ![](https://latex.codecogs.com/gif.latex?\inline&space;\large&space;\binom{n}{r}&space;=&space;\frac{n!}{r!(n-r)!}).
 
-But instead I used a reverse factorial formula to solve the combinations faster as seen in `def reverse_factorial`. My motivation for this approach was to avoid large numbers in the numerator or denominator which can contribute to slower calculation times. I made a gif to illustrate how quickly sets of ![](https://latex.codecogs.com/gif.latex?\inline&space;\large&space;\binom{n}{r}) will begin to exceed our one-million threshold. 
+But instead I used a reverse factorial formula to solve the combinations faster as seen in function ```reverse_factorial```. My motivation for this approach was to avoid large numbers in the numerator or denominator which can contribute to slower calculation times. I made a gif to illustrate how quickly sets of ![](https://latex.codecogs.com/gif.latex?\inline&space;\large&space;\binom{n}{r}) will begin to exceed our one-million threshold. 
 
 ![](nCr_animation.gif)
 
