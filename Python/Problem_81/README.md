@@ -3,7 +3,9 @@
 ## The Problem
 In the 5 by 5 matrix below, the minimal path sum from the top left to the bottom right, by only moving to the right and down, is indicated in bold red and is equal to 2427.
 
-![](https://latex.codecogs.com/gif.latex?\begin{pmatrix}&space;\color{red}{131}&space;&&space;673&space;&&space;234&space;&&space;103&space;&&space;18\\&space;\color{red}{201}&space;&&space;\color{red}{96}&space;&&space;\color{red}{342}&space;&&space;965&space;&&space;150\\&space;630&space;&&space;803&space;&&space;\color{red}{746}&space;&&space;\color{red}{422}&space;&&space;111\\&space;537&space;&&space;699&space;&&space;497&space;&&space;\color{red}{121}&space;&&space;956\\&space;805&space;&&space;732&space;&&space;524&space;&&space;\color{red}{37}&space;&&space;\color{red}{331}&space;\end{pmatrix})
+![](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cbegin%7Bpmatrix%7D%5Ccolor%7Bred%7D%7B131%7D%20%26%20673%20%26%20234%20%26%20103%20%26%2018%5C%5C%5Ccolor%7Bred%7D%7B201%7D%20%26%20%5Ccolor%7Bred%7D%7B96%7D%20%26%20%5Ccolor%7Bred%7D%7B342%7D%20%26%20965%20%26%20150%5C%5C630%20%26%20803%20%26%20%5Ccolor%7Bred%7D%7B746%7D%20%26%20%5Ccolor%7Bred%7D%7B422%7D%20%26%20111%5C%5C%20537%20%26%20699%20%26%20497%20%26%20%5Ccolor%7Bred%7D%7B121%7D%20%26%20956%5C%5C805%20%26%20732%20%26%20524%20%26%20%5Ccolor%7Bred%7D%7B37%7D%20%26%20%5Ccolor%7Bred%7D%7B331%7D%5Cend%7Bpmatrix%7D)
+
+Find the minimal path sum from the top left to the bottom right by only moving right and down in [matrix.txt](matrix.txt), a text file containing an 80 by 80 matrix.
 
 
 ## My Solution
