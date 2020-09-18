@@ -4,7 +4,7 @@
 
 ## My Solution
 
-'''md
+```python
 Initial Matrix  <class 'numpy.ndarray'>
 Shape  (3, 3)
 [10  1  2]
@@ -28,4 +28,4 @@ Shape  (2, 3)
 Matrix  <class 'numpy.ndarray'>
 Shape  (1, 3)
 [30 17 27]
-'''
+```
