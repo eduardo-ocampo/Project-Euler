@@ -17,7 +17,7 @@ Shape  (3, 3)
 [ 5  1 10]
 [15  5 10]
 
-Cumulative sum of first row
+Cumulative Sum of First Row
 [10 11 13]
 
 Matrix  <class 'numpy.ndarray'>
