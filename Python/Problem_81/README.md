@@ -9,7 +9,9 @@ Find the minimal path sum from the top left to the bottom right by only moving r
 
 
 ## My Solution
-Using brute 
+It would not be recommended to try every single possible path to solve this problem, as there are 1.075072087 E+23 possible paths. Instead I used an algorithm that would dynamically determine the best minimum path. Below is a short example of the algorithm at work on a 3x3 matrix .
+
+
 ```python
 Initial Matrix  <class 'numpy.ndarray'>
 Shape  (3, 3)
@@ -35,3 +37,6 @@ Matrix  <class 'numpy.ndarray'>
 Shape  (1, 3)
 [30 17 27]
 ```
+
+
+To begin either cumulatively sum the first column or row. I decided to perform an initial cumulative sum along the first row (first set of column values). Then move down one row while summing the first two row values, and work your way across the row. Where at each coordinate we sum the smallest of either the left or top value. At the end you will end up with the minimum path sum. For a 80x80 matrix the amount of recursive steps taken was 6,320. Surely a much better approach than comparing 1.075072087 E+23 possible paths
