@@ -37,7 +37,7 @@ def calc_area(v=1,h=1):
     grid_area = h_array*w_array
     rects = (w_array*w_array+w_array)*(h_array*h_array+h_array)/4
 
-    # find index of grid_area whose area is closet to 2e6
+    # find index of rects whose solution is closet to 2e6
     sol_idx = np.unravel_index(abs(rects-2e6).argmin(),rects.shape)
 
     return sol_idx, rects[sol_idx], grid_area[sol_idx]
