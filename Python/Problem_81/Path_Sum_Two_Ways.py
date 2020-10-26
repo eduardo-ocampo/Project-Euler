@@ -28,6 +28,7 @@ def sum_row(matrix):
     -----
     Recursively analysis each row and determine which direction to head
     """
+    
     try:
         matrix[1][0] += matrix[1-1][0]
     except IndexError: # break out when among the last 1
