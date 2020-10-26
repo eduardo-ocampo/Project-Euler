@@ -39,5 +39,5 @@ Now for a two-dimensional grid multiply these two solutions to determine how man
 In this solution, I utilized Numpy’s ability to [broadcast](https://numpy.org/devdocs/user/theory.broadcasting.html) two one-dimensional arrays. Where the first row contains a range of N values and the first column contains a range of M values. The result is a two-dimensional array containing the number of rectangles formed for a sweep of MxN combinations. A similar array was created calculating the MxN grid area. 
 
 The final step is to find the indices where the rectangle number is closest to 2,000,000 and index the grid area array with that information. The heatmaps below illustrate how various combinations of MxN grids approach 2,000,000 rectangles.
-![](difference.png)
 ![](rectangles_formed.png)
+![](difference.png)
