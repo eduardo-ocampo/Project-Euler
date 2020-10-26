@@ -9,7 +9,9 @@ import numpy as np
 def main():
 
     idxs, rects, ans = calc_area()
-    print(ans,rects,idxs)
+    str_out = "The grid with a nearest solution has the shape {}\n".format(idxs) +\
+              "with an area of {:,} containing {:,} rectangles.".format(ans,int(rects))
+    print(str_out)
 
 def calc_area(v=1,h=1):
     """
