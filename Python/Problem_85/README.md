@@ -24,12 +24,15 @@ As an example, consider a one-dimensional Mx1 grid. The number of rectangles whi
 |5 |15|
 
 To form a rectangle we need two vertical and two horizontal lines. A MxN grid has M+1 horizontal lines and N+1 vertical lines. This example has a combinatronic solution when we choose to pick 2 vertical lines from set M+1.
+
 ![](https://latex.codecogs.com/gif.latex?\binom{M&plus;1}{2})
 
 The same can be shown for a one-dimensional 1xN grid, The combinatoric solution is:
+
 ![](https://latex.codecogs.com/gif.latex?\binom{N&plus;1}{2})
 
 Now for a two-dimensional grid multiply these two solutions to determine how many rectangles can be formed in a MxN grid:
+
 ![](https://latex.codecogs.com/gif.latex?\binom{M&plus;1}{2}&space;\binom{N&plus;1}{2}&space;=&space;\frac{(M^{2}&plus;M)(N^{2}&plus;N)}{4})
 
 ### Calculation
