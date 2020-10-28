@@ -12,4 +12,4 @@ Below is a grid I created to illustrate which problems I have solved and their l
 
 The highest difficulty solved is **35%**
 
-Accounting for all **7** problems I have solved, the average difficulty is **10.63%**
+Accounting for all **8** problems I have solved, the average difficulty is **10.63%**
