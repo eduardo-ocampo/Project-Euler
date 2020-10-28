@@ -10,6 +10,6 @@ Below is a grid I created to illustrate which problems I have solved and their l
 
 ![](progress_heatmap.png)
 
-The highest difficulty solved is **35%**.
+The highest difficulty solved is **35%**
 
 Accounting for all **7** problems I have solved, the average difficulty is **10.63%**
