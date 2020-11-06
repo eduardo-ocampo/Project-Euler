@@ -15,123 +15,28 @@ def main():
     # Get all grid keys
     gs_keys = list(grids.keys())
     # gs_keys = ['Grid 06']
-    # gs = 'Grid 50'
+    # grid_num = 'Grid 50'
 
     # Initialize soluiton list, and counter
     sol_list, count = [], 0
 
     # Solve each grid
-    for gs in gs_keys:
+    for grid_num in gs_keys:
 
         print("Original grid:")
-        display_grid(grids,[gs])
-        grid_result = solve_grid(grids,gs)
+        display_grid(grids,[grid_num])
+        grid_result = solve_grid(grids,grid_num)
         print("Solution: ")
-        display_grid(grids,[gs])
+        display_grid(grids,[grid_num])
 
         if grid_result:
             count += 1
-            sol_list.append(read_digits(grids,gs))
+            sol_list.append(read_digits(grids,grid_num))
 
     ans = "{} grid(s) were solved. The summation of each first\n".format(count) +\
           "three cells in the top left of each solved grid is: {}".format(sum(sol_list))
     print(ans)
 
-def solve_grid(grid,grid_num):
-
-
-    if take_steps(grid,grid_num):
-        return True
-
-    else:
-
-        # first strategies did not work
-        # begin taking a guess and backtrack if needed
-        min_vals = [[row,col] for cv in range(2,10) 
-                              for row,col in product(range(9),repeat=2) 
-                              if len(grid[grid_num][row][col]) == cv]
-        # for cv in count_vals:
-        #     for row,col in product(range(9),repeat=2):
-        #         if len(grid[grid_num][row][col]) == cv:
-        #             # print(grids[gs][row][col])
-        #             min_vals.append([row,col])
-        #             # break
-        
-        # print("Wokring area")
-        # print("min vals:",min_vals)
-        # return False
-        # sec_check = False
-        # print(min_vals)
-        for row_idx,col_idx  in min_vals:
-            # row_idx,col_idx = min_idx
-            # if check_solved_grid == True:
-            #     break
-            # if sec_check == True:
-            #     # check_solved_grid == True
-            #     return True
-            # print("Copying grid")
-            copied_grid = copy.deepcopy(grid)
-            for mv_vals in copied_grid[grid_num][row_idx][col_idx]:
-                original_val = copied_grid[grid_num][row_idx][col_idx]
-                # print("mv: ",mv_vals)
-                # print(og_val)
-                # print("Taking guess {} at {}".format(mv_vals,copied_grid[gs][mv[0]][mv[1]]))
-                # print(grids[gs][min_vals[0][0]][min_vals[0][1]][0])
-                copied_grid[grid_num][row_idx][col_idx]= mv_vals
-                # copied_grid[gs][min_vals[0][0]][min_vals[0][1]] = '5'
-                # sec_check = take_steps(copied_grid,grid_num)
-                if take_steps(copied_grid,grid_num):
-                    # print("Solved during second check")
-
-                    grid[grid_num] = copied_grid[grid_num]
-
-                    return True
-                copied_grid[grid_num][row_idx][col_idx]= original_val
-
-    return False
-
-def read_digits(g,gs):
-
-    row_res = [(i) for i in g[gs][0][0:3]]
-    res = int(''.join(row_res))
-
-    return res
-
-def take_steps(g,gs):
-
-    solve_progress = [0,1]
-    # display_grid(g,sel_grids=[gss])
-
-    for i in range(10):
-        if solve_progress[-1] == solve_progress[-2]:
-            # Try naked pair strategy
-            SuDokuStrategies.naked_pairs(g,gs)
-
-            if SuDokuStrategies.check_if_solved(g,gs) == solve_progress[-2]:
-                break
-            
-            # continue
-        # print("iteration: ",i)
-        SuDokuStrategies.solve_cells(g,gs)
-        # display_grid(grids,sel_grids=[gs])
-
-        SuDokuStrategies.reduce_cells(g,gs)
-        # display_grid(g,sel_grids=[gs])
-
-        SuDokuStrategies.hidden_singles(g,gs)
-        # display_grid(g,sel_grids=[gs])
-
-        cells_solved = SuDokuStrategies.check_if_solved(g,gs)
-        solve_progress.append(cells_solved)
-
-        # print(ch)
-        if cells_solved == 81:
-            # print("Solved {}, \n\titerations = {} ".format(gss,i))
-            # cou += 1
-            return True
-
-    return False
-   
 def read_file(f):
     """"
     Parameter
@@ -213,10 +118,10 @@ def display_grid(grid,sel_grids=None):
     elif isinstance(sel_grids,list):
         grid_keys = sel_grids
         
-    for g in grid_keys:
-        str_grid = g + '\n\n'
+    for grid in grid_keys:
+        str_grid = grid + '\n\n'
 
-        for j, r in enumerate(grid[g]):
+        for j, r in enumerate(grid[grid]):
             if str(j) in '36':
                 str_grid += '- - - - + - - - - + - - - -\n'
         
@@ -226,6 +131,125 @@ def display_grid(grid,sel_grids=None):
         print(str_grid)
 
     return None
+
+def solve_grid(grid,grid_num):
+    """
+    Parameters
+    ----------
+    grid: dict
+        Dictionary data structure containing Suduko grids
+        See read_file() in Su_Doku.py for more information
+
+    grid_num: str
+        Grid number from dictionary grid. Used as key value when analyzing
+        cells, or grids.
+
+        Example: grid_num = 'Grid 06'
+
+    Returns
+    -------
+    bool
+    
+    Notes
+    -----
+    Solves Suduko grid by first passing it through take_steps(). If a 
+    solution is found the function will return True. If not, the function
+    will begin to guess a value at the cell with the least amount of 
+    possible solution. If that too leads to a dead end the function will
+    back track and try the next cell with the least amount of possible solutions. 
+    
+    """
+
+    if take_steps(grid,grid_num):
+        return True
+
+    else:
+
+        # Begin taking a guess at the cell with least amount of 
+        # possible solutions 
+        min_vals = [[row,col] for cv in range(2,10) 
+                              for row,col in product(range(9),repeat=2) 
+                              if len(grid[grid_num][row][col]) == cv]
+
+        for row_idx,col_idx  in min_vals:
+            # Copying grid to eliminate any unwanted modifications to the
+            # original grid structure
+            copied_grid = copy.deepcopy(grid)
+
+            for mv_vals in copied_grid[grid_num][row_idx][col_idx]:
+
+                # take a guess at cell (row_idx,col_idx) but keep 
+                # original value for reference
+                original_val = copied_grid[grid_num][row_idx][col_idx]
+                copied_grid[grid_num][row_idx][col_idx]= mv_vals
+
+                # If guess works return True, if not try the next cell
+                if take_steps(copied_grid,grid_num):
+                    grid[grid_num] = copied_grid[grid_num]
+                    return True
+
+                # set value at cell (row_idx,col_idx) back 
+                copied_grid[grid_num][row_idx][col_idx]= original_val
+
+    return False
+
+def take_steps(grid,grid_num):
+    """
+    Parameters
+    ----------
+    grid: dict
+        Dictionary data structure containing Suduko grids
+        See read_file() in Su_Doku.py for more information
+
+    grid_num: str
+        Grid number from dictionary grid. Used as key value when analyzing
+        cells, or grids.
+
+        Example: grid_num = 'Grid 06'
+
+    Returns
+    -------
+    bool
+    
+    Notes
+    -----
+    
+    """
+
+    solve_progress = [0,1]
+
+    for i in range(10):
+        if solve_progress[-1] == solve_progress[-2]:
+
+            # Try naked pair strategy
+            SuDokuStrategies.naked_pairs(grid,grid_num)
+
+            if SuDokuStrategies.check_if_solved(grid,grid_num) == solve_progress[-2]:
+                break
+        
+        # Check if there exists any solved cells
+        SuDokuStrategies.solve_cells(grid,grid_num)
+
+        # Reduce cell possibilites
+        SuDokuStrategies.reduce_cells(grid,grid_num)
+
+        # Check if cells have a hiddne single solution
+        SuDokuStrategies.hidden_singles(grid,grid_num)
+
+        cells_solved = SuDokuStrategies.check_if_solved(grid,grid_num)
+        solve_progress.append(cells_solved)
+
+        if cells_solved == 81:
+            return True
+
+    return False
+
+def read_digits(grid,grid_num):
+
+    row_res = [(i) for i in grid[grid_num][0][0:3]]
+    res = int(''.join(row_res))
+
+    return res
 
 if __name__ == '__main__':
     main()
