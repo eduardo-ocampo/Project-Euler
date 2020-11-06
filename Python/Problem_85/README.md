@@ -14,7 +14,7 @@ Although there exists no rectangular grid that contains exactly two million rect
 
 ### Formula
 
-As an example, consider a one-dimensional Mx1 grid. The number of rectangles which can be formed are shown in the table below:
+As an example, consider a one-dimensional Mx1 grid. The number of rectangles which can be formed as M increases is shown in the table below:
 |M | Rectangles|
 |--|------------|
 |1 |1|
