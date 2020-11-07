@@ -13,25 +13,25 @@ def main():
     grids = read_file(f_name)
 
     # Get all grid keys
-    gs_keys = list(grids.keys())
-    # gs_keys = ['Grid 06']
+    # gs_keys = list(grids.keys())
+    gs_keys = ['Grid 06']
     # grid_num = 'Grid 50'
 
     # Initialize soluiton list, and counter
     sol_list, count = [], 0
 
     # Solve each grid
-    for grid_num in gs_keys:
+    for grid_key in gs_keys:
 
         print("Original grid:")
-        display_grid(grids,[grid_num])
-        grid_result = solve_grid(grids,grid_num)
+        # display_grid(grids,[grid_key])
+        grid_result = solve_grid(grids,grid_key)
         print("Solution: ")
-        display_grid(grids,[grid_num])
+        # display_grid(grids,[grid_key])
 
         if grid_result:
             count += 1
-            sol_list.append(read_digits(grids,grid_num))
+            sol_list.append(read_digits(grids,grid_key))
 
     ans = "{} grid(s) were solved. The summation of each first\n".format(count) +\
           "three cells in the top left of each solved grid is: {}".format(sum(sol_list))
@@ -118,10 +118,10 @@ def display_grid(grid,sel_grids=None):
     elif isinstance(sel_grids,list):
         grid_keys = sel_grids
         
-    for grid in grid_keys:
-        str_grid = grid + '\n\n'
+    for g in grid_keys:
+        str_grid = g + '\n\n'
 
-        for j, r in enumerate(grid[grid]):
+        for j, r in enumerate(grid[g]):
             if str(j) in '36':
                 str_grid += '- - - - + - - - - + - - - -\n'
         
@@ -156,7 +156,8 @@ def solve_grid(grid,grid_num):
     solution is found the function will return True. If not, the function
     will begin to guess a value at the cell with the least amount of 
     possible solution. If that too leads to a dead end the function will
-    back track and try the next cell with the least amount of possible solutions. 
+    back track and try the next cell with the least amount of possible solutions
+    until a solution is found returning True.  
     
     """
 
@@ -193,7 +194,7 @@ def solve_grid(grid,grid_num):
 
     return False
 
-def take_steps(grid,grid_num):
+def take_steps(grid,grid_num,n=10):
     """
     Parameters
     ----------
@@ -207,18 +208,35 @@ def take_steps(grid,grid_num):
 
         Example: grid_num = 'Grid 06'
 
+    n: int
+        Number of iterations to take
+
     Returns
     -------
     bool
     
     Notes
     -----
-    
+    This function will take steps in solving the Sudoku grid by following
+    three strategies:
+    1) Using SuDokuStrategies.solve_cells(), check if a cell has only
+       one possible solution and assign it.
+    2) Using SuDokuStrategies.reduce_cells(), analysis across a cell's
+       row, column, and box to remove possible solutions. 
+    3) Using SuDokuStrategies.hidden_singles(), at a cell check to see if
+       a number is unique within its row, column, and box. If so, that 
+       number is a solution to the cell. 
+
+    After every iteration the number of solved cells is checked and 
+    if all cells are accounted for the grid is considered solved returning
+    True. if no progress is being made by the three strategies then the 
+    SuDokuStrategies.nake_pairs() strategy is used.
+
     """
 
     solve_progress = [0,1]
 
-    for i in range(10):
+    for i in range(n):
         if solve_progress[-1] == solve_progress[-2]:
 
             # Try naked pair strategy
@@ -233,7 +251,7 @@ def take_steps(grid,grid_num):
         # Reduce cell possibilites
         SuDokuStrategies.reduce_cells(grid,grid_num)
 
-        # Check if cells have a hiddne single solution
+        # Check if cells have a hidden single solution
         SuDokuStrategies.hidden_singles(grid,grid_num)
 
         cells_solved = SuDokuStrategies.check_if_solved(grid,grid_num)
@@ -245,6 +263,43 @@ def take_steps(grid,grid_num):
     return False
 
 def read_digits(grid,grid_num):
+    """
+    Parameters
+    ----------
+    grid: dict
+        Dictionary data structure containing Suduko grids
+        See read_file() in Su_Doku.py for more information
+
+    grid_num: str
+        Grid number from dictionary grid. Used as key value when analyzing
+        cells, or grids.
+
+    Returns
+    -------
+    res: int
+        The first 3-digits found at the top left corner of grid_num.
+
+    Examples
+    --------
+    >>> display_grid(grids,['Grid 06])
+    >>> print("Top Left Integers: ",read_digits(grids,grid_key))
+    Grid 06
+
+    1  7  6 | 9  2  3 | 5  8  4 
+    5  2  4 | 8  1  7 | 6  3  9 
+    8  9  3 | 6  5  4 | 2  7  1 
+    - - - - + - - - - + - - - -
+    9  5  7 | 3  4  8 | 1  6  2 
+    6  3  8 | 1  9  2 | 4  5  7 
+    4  1  2 | 7  6  5 | 3  9  8 
+    - - - - + - - - - + - - - -
+    2  6  5 | 4  8  9 | 7  1  3 
+    7  8  1 | 2  3  6 | 9  4  5 
+    3  4  9 | 5  7  1 | 8  2  6 
+
+    Top Left Integers:  176
+    
+    """
 
     row_res = [(i) for i in grid[grid_num][0][0:3]]
     res = int(''.join(row_res))
