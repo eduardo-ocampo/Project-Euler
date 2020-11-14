@@ -253,7 +253,7 @@ def check_if_solved(grid,grid_sel):
 
     Returns
     -------
-    Number of cells which contain a valid solution and are considered solved
+    Number of cells which contain a single solution
 
     """
     copied_grid = copy.deepcopy(grid)
