@@ -5,17 +5,16 @@
                https://www.github.com/thatguyeddieo                            
 -------------------------------------------------------------------------- """
 import copy
-from itertools import product 
 import SuDokuStrategies
+from itertools import product 
 
 def main():
+
     f_name = 'sudoku.txt'
     grids = read_file(f_name)
 
     # Get all grid keys
-    # gs_keys = list(grids.keys())
-    gs_keys = ['Grid 06']
-    # grid_num = 'Grid 50'
+    gs_keys = list(grids.keys())
 
     # Initialize soluiton list, and counter
     sol_list, count = [], 0
@@ -24,17 +23,18 @@ def main():
     for grid_key in gs_keys:
 
         print("Original grid:")
-        # display_grid(grids,[grid_key])
+        display_grid(grids,[grid_key])
         grid_result = solve_grid(grids,grid_key)
         print("Solution: ")
-        # display_grid(grids,[grid_key])
+        display_grid(grids,[grid_key])
 
         if grid_result:
             count += 1
             sol_list.append(read_digits(grids,grid_key))
-
-    ans = "{} grid(s) were solved. The summation of each first\n".format(count) +\
+            
+    ans = "{} grid(s) were solved. The summation of the first\n".format(count) +\
           "three cells in the top left of each solved grid is: {}".format(sum(sol_list))
+
     print(ans)
 
 def read_file(f):
@@ -42,7 +42,7 @@ def read_file(f):
     Parameter
     ---------
     f: string
-        file name
+        file name containing Sudoku puzzles
     
     Returns
     -------
@@ -142,7 +142,7 @@ def solve_grid(grid,grid_num):
 
     grid_num: str
         Grid number from dictionary grid. Used as key value when analyzing
-        cells, or grids.
+        specific unsolved cells, or grids.
 
         Example: grid_num = 'Grid 06'
 
@@ -154,10 +154,10 @@ def solve_grid(grid,grid_num):
     -----
     Solves Suduko grid by first passing it through take_steps(). If a 
     solution is found the function will return True. If not, the function
-    will begin to guess a value at the cell with the least amount of 
+    will begin to guess a value at the unsolved cell with the least amount of 
     possible solution. If that too leads to a dead end the function will
-    back track and try the next cell with the least amount of possible solutions
-    until a solution is found returning True.  
+    back track and try the next unsolved cell with the least amount of possible
+    solutions until a solution is found and returning True.  
     
     """
 
@@ -166,15 +166,15 @@ def solve_grid(grid,grid_num):
 
     else:
 
-        # Begin taking a guess at the cell with least amount of 
-        # possible solutions 
+        # Begin taking a guess at the unsolved cell with least amount of 
+        # possible solutions
         min_vals = [[row,col] for cv in range(2,10) 
                               for row,col in product(range(9),repeat=2) 
                               if len(grid[grid_num][row][col]) == cv]
 
         for row_idx,col_idx  in min_vals:
             # Copying grid to eliminate any unwanted modifications to the
-            # original grid structure
+            # original grid data structure
             copied_grid = copy.deepcopy(grid)
 
             for mv_vals in copied_grid[grid_num][row_idx][col_idx]:
@@ -184,12 +184,14 @@ def solve_grid(grid,grid_num):
                 original_val = copied_grid[grid_num][row_idx][col_idx]
                 copied_grid[grid_num][row_idx][col_idx]= mv_vals
 
-                # If guess works return True, if not try the next cell
+                # If guess works return True, if not try the next available
+                # unsolved cell
                 if take_steps(copied_grid,grid_num):
                     grid[grid_num] = copied_grid[grid_num]
                     return True
 
-                # set value at cell (row_idx,col_idx) back 
+                # set value at cell (row_idx,col_idx) back to its
+                # original value
                 copied_grid[grid_num][row_idx][col_idx]= original_val
 
     return False
@@ -204,7 +206,7 @@ def take_steps(grid,grid_num,n=10):
 
     grid_num: str
         Grid number from dictionary grid. Used as key value when analyzing
-        cells, or grids.
+        specific unsolved cells, or grids.
 
         Example: grid_num = 'Grid 06'
 
@@ -217,20 +219,21 @@ def take_steps(grid,grid_num,n=10):
     
     Notes
     -----
-    This function will take steps in solving the Sudoku grid by following
+    This function will take steps in solving a Sudoku puzzle by following
     three strategies:
-    1) Using SuDokuStrategies.solve_cells(), check if a cell has only
-       one possible solution and assign it.
-    2) Using SuDokuStrategies.reduce_cells(), analysis across a cell's
-       row, column, and box to remove possible solutions. 
-    3) Using SuDokuStrategies.hidden_singles(), at a cell check to see if
-       a number is unique within its row, column, and box. If so, that 
-       number is a solution to the cell. 
+    1) Using SuDokuStrategies.solve_cells(), check if an unsolved cell has
+       only one possible solution and assign it.
+    2) Using SuDokuStrategies.reduce_cells(), search across an unsolved
+       cell's row, column, and box to remove possible solutions. 
+    3) Using SuDokuStrategies.hidden_singles(), at a given unsolved cell
+       check to see if a solution is unique to that cell by comparing it
+       across its row, column, and box. 
 
-    After every iteration the number of solved cells is checked and 
-    if all cells are accounted for the grid is considered solved returning
-    True. if no progress is being made by the three strategies then the 
-    SuDokuStrategies.nake_pairs() strategy is used.
+    After all three strategies are used, the grid is checked for number of
+    solved cells. Only when all 81 cells are solved will the function will
+    return True. If no progress is being made by the three strategies then 
+    the SuDokuStrategies.naked_pairs() strategy is used to aid in solving 
+    the puzzle.
 
     """
 
@@ -272,7 +275,7 @@ def read_digits(grid,grid_num):
 
     grid_num: str
         Grid number from dictionary grid. Used as key value when analyzing
-        cells, or grids.
+        specific unsolved cells, or grids.
 
     Returns
     -------
