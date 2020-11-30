@@ -17,15 +17,16 @@ def solve_cells(grid,grid_num):
 
     grid_num: str
         Grid number from dictionary grid. Used as key value when analyzing
-        cells, or grids.
+        specific unsolved cells, or grids.
 
         Example: grid_num = 'Grid 06'
 
     Returns
     -------
     None
-        The passed Suduko grid will contain the updated cell values as 
+        The passed Suduko grid will contain the updated cell values after 
         processed through this function
+
     Notes
     -----
     
