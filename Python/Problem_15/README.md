@@ -14,18 +14,21 @@ How many such routes are there through a 20x20 grid?
 
 I took a combinations approach for this problem. For a 20x20 grid there are a total of 40 decisions right or down dicisions to make. However, not all 40 can be either just right moves. Instead think about the problem as how many ways can you choose 20 rights out of the 40 moves?
 
-$nCr = 
+```math
+nCr = 
 \begin{pmatrix}
 n \\
 r 
 \end{pmatrix}
 =
-\frac{n!}{r!\left(n-r)!}$
+\frac{n!}{r!\left(n-r\right)!}
+```
 
-$ 
+```math 
 \begin{pmatrix}
 40 \\
 20
 \end{pmatrix}
 =
-\frac{40!}{20!20!}$
+\frac{40!}{20!20!}
+```
