@@ -57,6 +57,7 @@ def main(progress):
     plt.savefig('progress_heatmap.png')
 
     return None
+    
 def make_hmap():
 
     return None
@@ -64,6 +65,8 @@ def make_hmap():
 if __name__ == "__main__":
 
     progress = {  '1': [  1, 5],
+                 '13': [ 13, 5],
+                 '15': [ 15, 5],
                  '18': [ 18, 5],
                  '52': [ 52, 5],
                  '53': [ 53, 5],
