@@ -30,12 +30,18 @@ def main(progress):
     txt_data = np.array(range(1,121)).reshape(12,10)
 
     for i in progress.keys():
-        n_mod = math.modf(progress[i][0]/10)
+        n_mod = math.modf(int(i)/10)
 
-        x_cord = int(round(n_mod[0]*10))
-        y_cord = int(n_mod[1])
+        if n_mod[0] == 0:
+            # Handle mults of 10
+            x_cord = int(n_mod[1])
+            y_cord = int(n_mod[1])-1
+            hm_color[y_cord][9] = progress[i]
+        else:
+            x_cord = int(round(n_mod[0]*10))
+            y_cord = int(n_mod[1])
+            hm_color[y_cord][x_cord-1] = progress[i]
 
-        hm_color[y_cord][x_cord-1] = progress[i][1]
 
     # this block adds a line to include problem 317 which is outside
     # original 100 problems
@@ -64,14 +70,22 @@ def make_hmap():
 
 if __name__ == "__main__":
 
-    progress = {  '1': [  1, 5],
-                 '13': [ 13, 5],
-                 '15': [ 15, 5],
-                 '18': [ 18, 5],
-                 '52': [ 52, 5],
-                 '53': [ 53, 5],
-                 '67': [ 67, 5],
-                 '81': [ 81,10],
-                 '85': [ 85,15]}
+    # Move Soduku scripts to something call game_thoery
+    # Setup: {'#Problem',%difficulty}
+    progress = {  '1':  5,
+                  '3':  5,
+                  '7':  5,
+                 '10':  5,
+                 '13':  5,
+                 '15':  5,
+                 '18':  5,
+                 '52':  5,
+                 '53':  5,
+                #  '60': 20, # Working
+                 '67':  5,
+                 '81': 10,
+                 '85': 15,
+                #  '96': 25 # Finish write up
+               }
 
     main(progress)
