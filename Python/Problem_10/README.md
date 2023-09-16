@@ -1,0 +1,18 @@
+# Problem 10 Solution
+
+## The Problem
+
+The sum of the primes below 10 is 2+3+5+7=17.
+
+Find the sum of all the primes below two million.
+
+[Source](https://projecteuler.net/problem=10)
+
+## My Solution
+
+This is a good complimnary example to [Problem 7](../Problem_7) and the functioanlity of Python Class [number_theory.primes()](../number_theory.py). For this problem we can use the upper number parameter to get all the primes numbers up to 2,000,00 and sum the list. 
+
+```python
+# Get the sum of primes below 2e6
+sum(list(primes(n_limit=2000000)))
+```
