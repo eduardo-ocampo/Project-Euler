@@ -10,4 +10,4 @@ What is the 10,001st prime number?
 
 ## My Solution
 
-I created Python Class [number_theory.primes()](../number_theory.py) to list the number of prime numbers up to either a number limit or quantity limit. For this problem we can use the quantity limit to get the first 10,001 prime numbers and index the list one.
+I created Python Class [number_theory.numbers.primes()](../number_theory/numbers.py) to list the number of prime numbers up to either a number limit or quantity limit. For this problem we can use the quantity limit to get the first 10,001 prime numbers and index the list one.

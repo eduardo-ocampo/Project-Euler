@@ -4,7 +4,7 @@
                Copyright (c) Eduardo Ocampo, All Rights Reserved               
                https://www.github.com/thatguyeddieo/Project-Euler                            
 -------------------------------------------------------------------------- """
-from number_theory import primes
+from number_theory.numbers import primes
 
 primes = primes(n_primes=10001)
 
