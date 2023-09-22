@@ -79,13 +79,28 @@ if __name__ == "__main__":
                  '13':  5,
                  '15':  5,
                  '18':  5,
+                #  '42':  5, # Up next
+                #  '44':  5, # Up next
+                #  '45':  5, # Up next
                  '52':  5,
                  '53':  5,
-                #  '60': 20, # Working
+                 '60': 20, 
                  '67':  5,
                  '81': 10,
                  '85': 15,
                 #  '96': 25 # Finish write up
+                #  '144':  # Interesting
+                #  '226':  # Interesting
+                #  '309':  # Up next
+                #  '349':  # Interesting
+                #  '607':  # Interesting
                }
 
     main(progress)
+
+    # # Get number of problems solved and average difficulty
+    # problems_solved = len(progress.keys())
+    # avg_rating = sum(progress.values())/problems_solved
+    
+    # print("# Problems: ",problems_solved)
+    # print("Avg Rating: ",avg_rating)
