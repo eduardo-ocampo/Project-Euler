@@ -2,7 +2,7 @@
 
 ## The Problem
 
-The blancmange curve is the set of points $(x,y)$ such that $0 \le x \le 1$ and $y = {\sum_{n=0}}^{\infty} \frac{s(2^nx)}{2^n}$, where $s(x)$ is the distance from $x$ to the nearest integer. 
+The blancmange curve is the set of points $(x,y)$ such that $0 \le x \le 1$ and $y = \sum_{n=0}^{\infty} \frac{s(2^nx)}{2^n}$, where $s(x)$ is the distance from $x$ to the nearest integer. 
 
 The area under the blancmange curve is equal to $\frac{1}{2}$, shown in pink in the diagram below.
 
